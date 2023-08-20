@@ -1,0 +1,104 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    title: 'Banco Cami',
+    home: PaginaSecundaria(),
+  ));
+}
+
+class PaginaPrincipal extends StatefulWidget {
+  const PaginaPrincipal({Key? key}) : super(key: key);
+
+  @override
+  State<PaginaPrincipal> createState() => _PaginaPrincipalState();
+}
+
+class _PaginaPrincipalState extends State<PaginaPrincipal> {
+  @override
+  Widget build(BuildContext) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("Mercado Digital"),
+          centerTitle: true,
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            TextFormField(
+              decoration: InputDecoration(
+                icon: Icon(Icons.account_circle),
+                hintText: "Digite seu login",
+                labelText: "Login",
+              ),
+            ),
+            TextFormField(
+              decoration: InputDecoration(
+                icon: Icon(Icons.password),
+                hintText: "Digite sua senha",
+                labelText: "Senha",
+              ),
+            ),
+          ],
+        ));
+  }
+}
+
+class PaginaSecundaria extends StatefulWidget {
+  const PaginaSecundaria({Key? key}) : super(key: key);
+
+  @override
+  State<PaginaSecundaria> createState() => _PaginaSecundariaState();
+}
+
+class _PaginaSecundariaState extends State<PaginaSecundaria> {
+  List<Produto> listaDeCompras = [
+    Produto("Arros", 5, "img/arroz.png"),
+    Produto("Feijão", 8, "img/feijao.jpg"),
+    Produto("Açuca", 8, "img/acuca.jpg"),
+    Produto("Manteiga", 7, "img/manteiga.png"),
+    Produto("Macarrão", 3, "img/macarao.jpg"),
+  ];
+  @override
+  Widget build(BuildContext) {
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {}, child: Icon(Icons.shopping_cart)),
+      bottomSheet: SizedBox(
+      height: 50,
+        child: Container(
+          color: Colors.red,
+        )
+        (child: Text("Preço Total: "))),
+      appBar: AppBar(title: Text('Lista de Compras'), centerTitle: true),
+      body: ListView.builder(
+          itemCount: listaDeCompras.length,
+          itemBuilder: (context, index) {
+            return Card(
+                child: ListTile(
+              leading: Image.asset(listaDeCompras[index].img),
+              title: Text(listaDeCompras[index].nome),
+              subtitle:
+                  Text("R\$ ${listaDeCompras[index].preco.toString()},00"),
+              trailing: ElevatedButton(
+                onPressed: () {},
+                child: Text("Comprar"),
+              ),
+            ));
+          }),
+    );
+  }
+}
+
+class Produto {
+  String nome = "";
+  double preco = 0.0;
+  String img = "";
+
+  Produto(String _nome, double _preco, String _img) {
+    nome = nome;
+    preco = _preco;
+    img = _img;
+  }
+}
